@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://napsternpt.github.io/",
-		"sources": "https://github.com/NapsterNPT/Did-You-Metion-Me"
+		"sources": "https://github.com/NapsterNPT/Did-You-Mention-Me",
+		"issues": "https://github.com/NapsterNPT/Did-You-Mention-Me/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/didyoumentionme/icon.png",
