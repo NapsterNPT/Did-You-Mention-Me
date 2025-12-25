@@ -24,6 +24,9 @@
 		],
 		"client": [
 			"net.napsternpt.didyoumentionme.DidYouMentionMeClient"
+		],
+		"modmenu": [
+			"net.napsternpt.didyoumentionme.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

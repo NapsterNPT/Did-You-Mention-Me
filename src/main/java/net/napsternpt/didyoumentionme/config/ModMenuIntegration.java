@@ -1,13 +1,17 @@
 package net.napsternpt.didyoumentionme.config;
 
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
+import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
 
 @Environment(EnvType.CLIENT)
-public class ModMenuIntegration {
-    public static Screen getConfigScreen(Screen parent) {
-        return AutoConfig.getConfigScreen(ModConfig.class, parent).get();
+public class ModMenuIntegration implements ModMenuApi {
+
+    @Override
+    public ConfigScreenFactory<?> getModConfigScreenFactory() {
+        return parent -> AutoConfig.getConfigScreen(ModConfig.class, parent).get();
     }
 }
