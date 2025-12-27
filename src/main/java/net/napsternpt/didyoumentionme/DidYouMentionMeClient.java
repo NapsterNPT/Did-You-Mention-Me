@@ -22,14 +22,19 @@ public class DidYouMentionMeClient implements ClientModInitializer {
         ClientReceiveMessageEvents.CHAT.register(
                 (message, signedMessage, sender, params, receptionTimestamp) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (client.player == null || client.isWindowFocused()) return;
 
-                    String playerName = client.player.getName().getString();
-                    if (message.getString().toLowerCase().contains(playerName.toLowerCase())) {
+                    boolean enable = config.enable;
 
-                        boolean enable = config.enable;
+                    if (config.onlyOnUnfocus) {
+                        if (client.player == null || client.isWindowFocused() || !enable) return;
+                    } else {
+                        if (client.player == null || !enable) return;
+                    }
 
-                        if (enable) {
+                    for (int i = 0; i < config.namesList.length - 1; i++) {
+                        String name = config.namesList[i];
+                        if (message.getString().toLowerCase().contains(name.toLowerCase())) {
+
                             String mentionSound = "minecraft:" + config.sound;
                             SoundEvent soundEvent = Registries.SOUND_EVENT.get(
                                     Identifier.of(mentionSound)
