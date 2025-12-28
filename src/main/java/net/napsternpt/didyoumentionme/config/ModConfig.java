@@ -10,8 +10,10 @@ import net.minecraft.client.MinecraftClient;
 public class ModConfig implements ConfigData {
     public boolean enable = true;
 
+    @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean onlyOnUnfocus = true;
 
+    @ConfigEntry.Gui.Tooltip(count = 1)
     public String[] namesList = {MinecraftClient.getInstance().getSession().getUsername()};
 
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
