@@ -31,7 +31,7 @@ public class DidYouMentionMeClient implements ClientModInitializer {
                         if (client.player == null || !enable) return;
                     }
 
-                    for (int i = 0; i < config.namesList.length - 1; i++) {
+                    for (int i = 0; i < config.namesList.length; i++) {
                         String name = config.namesList[i];
                         if (message.getString().toLowerCase().contains(name.toLowerCase())) {
 
