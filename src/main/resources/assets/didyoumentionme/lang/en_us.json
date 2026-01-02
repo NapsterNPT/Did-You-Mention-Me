@@ -7,6 +7,7 @@
   "text.autoconfig.didyoumentionme.option.volume": "Volume",
   "text.autoconfig.didyoumentionme.option.sound": "Sound",
 
-  "text.autoconfig.didyoumentionme.option.onlyOnUnfocus.@Tooltip": "Run only on Un-Focus mode",
-  "text.autoconfig.didyoumentionme.option.namesList.@Tooltip": "List of all the names you should be pinged of"
+  "text.autoconfig.didyoumentionme.option.onlyOnUnfocus.@Tooltip": "Run only on Un-Focus mode.",
+  "text.autoconfig.didyoumentionme.option.namesList.@Tooltip[0]": "List of all the names you should be pinged of.",
+  "text.autoconfig.didyoumentionme.option.namesList.@Tooltip[1]": "No need for uppercase and lowercase variations of the names."
 }

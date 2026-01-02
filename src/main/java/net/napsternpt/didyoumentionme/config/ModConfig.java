@@ -13,7 +13,7 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public boolean onlyOnUnfocus = true;
 
-    @ConfigEntry.Gui.Tooltip(count = 1)
+    @ConfigEntry.Gui.Tooltip(count = 2)
     public String[] namesList = {MinecraftClient.getInstance().getSession().getUsername()};
 
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
