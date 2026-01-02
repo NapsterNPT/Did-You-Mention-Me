@@ -26,10 +26,9 @@ public class DidYouMentionMeClient implements ClientModInitializer {
                     boolean enable = config.enable;
 
                     if (config.onlyOnUnfocus) {
-                        if (client.player == null || client.isWindowFocused() || !enable) return;
-                    } else {
-                        if (client.player == null || !enable) return;
+                        if (client.isWindowFocused()) return;
                     }
+                    if (client.player == null || sender.getName().equals(client.player.getName().getString()) || !enable) return;
 
                     for (int i = 0; i < config.namesList.length; i++) {
                         String name = config.namesList[i];
@@ -41,10 +40,9 @@ public class DidYouMentionMeClient implements ClientModInitializer {
                             );
 
                             float volume = config.volume / 100f;
-                            System.out.println(volume);
-
                             client.getSoundManager().play(PositionedSoundInstance.master(soundEvent, 1.0f, volume));
 
+                            return;
                         }
                     }
                 }
