@@ -28,7 +28,8 @@ public class DidYouMentionMeClient implements ClientModInitializer {
                     if (config.onlyOnUnfocus) {
                         if (client.isWindowFocused()) return;
                     }
-                    if (client.player == null || sender.getName().equals(client.player.getName().getString()) || !enable) return;
+
+                    if (client.player == null || (sender != null && sender.getName().equals(client.player.getName().getString())) || !enable) return;
 
                     for (int i = 0; i < config.namesList.length; i++) {
                         String name = config.namesList[i];
