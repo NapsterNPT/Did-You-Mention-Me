@@ -5,5 +5,3 @@
 This will make a notification sound whenever someone says your nickname and the Minecraft window isn't in focus mode.
 
 You can download the mod from [Modrinth](https://modrinth.com/mod/did-you-mention-me) or the [GitHub Repository](https://github.com/NapsterNPT/Did-You-Mention-Me/); any other source will be marked as unofficial.
-
-# TEST README FROM GITHUB
