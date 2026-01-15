@@ -25,23 +25,31 @@ public class DidYouMentionMeClient implements ClientModInitializer {
 
                     boolean enable = config.enable;
 
+                    if (!enable || client.player == null) return;
+
                     if (config.onlyOnUnfocus) {
                         if (client.isWindowFocused()) return;
                     }
 
-                    if (client.player == null || (sender != null && sender.getName().equals(client.player.getName().getString())) || !enable) return;
+                    if (sender != null) {
+                        String senderName = sender.getName();
+                        String playerName = client.player.getName().getString();
+                        if (senderName.equals(playerName)) return;
+                    }
 
-                    for (int i = 0; i < config.namesList.length; i++) {
-                        String name = config.namesList[i];
-                        if (message.getString().toLowerCase().contains(name.toLowerCase())) {
+                    String messageText = message.getString().toLowerCase();
 
+                    for (String name : config.namesList) {
+                        if (messageText.contains(name.toLowerCase())) {
                             String mentionSound = "minecraft:" + config.sound;
                             SoundEvent soundEvent = Registries.SOUND_EVENT.get(
                                     Identifier.of(mentionSound)
                             );
 
                             float volume = config.volume / 100f;
-                            client.getSoundManager().play(PositionedSoundInstance.master(soundEvent, 1.0f, volume));
+                            client.getSoundManager().play(
+                                    PositionedSoundInstance.master(soundEvent, 1.0f, volume)
+                            );
 
                             return;
                         }

@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "didyoumentionme",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"name": "Did You Mention Me?",
 	"description": "No more worries about someone calling you when you are AFK.",
 	"authors": [
