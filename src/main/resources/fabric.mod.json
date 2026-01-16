@@ -12,7 +12,7 @@
 		"sources": "https://github.com/NapsterNPT/Did-You-Mention-Me",
 		"issues": "https://github.com/NapsterNPT/Did-You-Mention-Me/issues"
 	},
-	"license": "MIT",
+	"license": "LGPL-3.0",
 	"icon": "assets/didyoumentionme/icon.png",
 	"environment": "*",
 	"entrypoints": {
