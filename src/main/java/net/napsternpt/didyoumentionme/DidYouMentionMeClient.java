@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
+import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.napsternpt.didyoumentionme.config.ModConfig;
@@ -11,8 +12,13 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.text.Text;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DidYouMentionMeClient implements ClientModInitializer {
+
+    private final Queue<String> sentMessages = new LinkedList<>();
+    private static final int MAX_TRACKED_MESSAGES = 5;
 
     private void checkAndPlaySound(Text message) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -22,15 +28,20 @@ public class DidYouMentionMeClient implements ClientModInitializer {
 
         if (config.onlyOnUnfocus && client.isWindowFocused()) return;
 
-        String messageText = message.getString().toLowerCase();
-        String playerName = client.player.getName().getString().toLowerCase();
+        String messageText = message.getString();
+        String messageLower = messageText.toLowerCase();
 
-        if (messageText.contains(playerName) && messageText.startsWith("<" + playerName)) {
-            return;
+        synchronized (sentMessages) {
+            for (String sent : sentMessages) {
+                if (messageLower.contains(sent.toLowerCase())) {
+                    sentMessages.remove(sent);
+                    return;
+                }
+            }
         }
 
         for (String name : config.namesList) {
-            if (messageText.contains(name.toLowerCase())) {
+            if (messageLower.contains(name.toLowerCase())) {
                 String mentionSound = "minecraft:" + config.sound;
                 SoundEvent soundEvent = Registries.SOUND_EVENT.get(
                         Identifier.of(mentionSound)
@@ -51,11 +62,14 @@ public class DidYouMentionMeClient implements ClientModInitializer {
     public void onInitializeClient() {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
 
-        ClientReceiveMessageEvents.CHAT.register(
-                (message, signedMessage, sender, params, receptionTimestamp) -> {
-                    checkAndPlaySound(message);
+        ClientSendMessageEvents.CHAT.register((message) -> {
+            synchronized (sentMessages) {
+                sentMessages.add(message);
+                while (sentMessages.size() > MAX_TRACKED_MESSAGES) {
+                    sentMessages.poll();
                 }
-        );
+            }
+        });
 
         ClientReceiveMessageEvents.GAME.register(
                 (message, overlay) -> {
