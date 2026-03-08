@@ -12,6 +12,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.text.Text;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -42,17 +43,17 @@ public class DidYouMentionMeClient implements ClientModInitializer {
 
         for (String name : config.namesList) {
             if (messageLower.contains(name.toLowerCase())) {
-                String mentionSound = "minecraft:" + config.sound;
-                SoundEvent soundEvent = Registries.SOUND_EVENT.get(
-                        Identifier.of(mentionSound)
-                );
+
+                SoundEvent soundEvent;
+                if (config.sound.contains(":")) soundEvent = Registries.SOUND_EVENT.get(Identifier.of(config.sound));
+                else soundEvent = Registries.SOUND_EVENT.get(Identifier.of("minecraft", config.sound));
+                if (soundEvent == null) return;
 
                 float volume = config.volume / 100f;
                 client.getSoundManager().play(
                         PositionedSoundInstance.master(soundEvent, 1.0f, volume)
                 );
 
-                System.out.println("Mention detected: " + messageText);
                 return;
             }
         }
@@ -71,12 +72,10 @@ public class DidYouMentionMeClient implements ClientModInitializer {
             }
         });
 
-        ClientReceiveMessageEvents.GAME.register(
-                (message, overlay) -> {
-                    if (!overlay) {
-                        checkAndPlaySound(message);
-                    }
-                }
-        );
+        ClientReceiveMessageEvents.GAME.register((message, overlay) -> {
+            if (!overlay) {
+                checkAndPlaySound(message);
+            }
+        });
     }
 }
