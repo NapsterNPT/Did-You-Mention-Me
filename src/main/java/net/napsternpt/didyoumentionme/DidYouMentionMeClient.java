@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.sound.SoundCategory;
 import net.napsternpt.didyoumentionme.config.ModConfig;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.registry.Registries;
@@ -51,7 +53,9 @@ public class DidYouMentionMeClient implements ClientModInitializer {
 
                 float volume = config.volume / 100f;
                 client.getSoundManager().play(
-                        PositionedSoundInstance.master(soundEvent, 1.0f, volume)
+                        new PositionedSoundInstance(soundEvent.id(), SoundCategory.MASTER, volume, 1.0f,
+                                SoundInstance.createRandom(), false, 0, SoundInstance.AttenuationType.NONE, 0.0, 0.0, 0.0, true
+                        )
                 );
 
                 return;
