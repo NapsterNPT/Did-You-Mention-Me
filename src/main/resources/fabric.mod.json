@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "didyoumentionme",
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"name": "Did You Mention Me?",
 	"description": "No more worries about someone calling you when you are AFK.",
 	"authors": [
@@ -34,7 +34,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.18.4",
-		"minecraft": "~1.21.7",
+		"minecraft": "~1.21.8",
 		"java": ">=21",
 		"fabric-api": "*"
 	}
