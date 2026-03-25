@@ -57,6 +57,7 @@ public class DidYouMentionMeClient implements ClientModInitializer {
                                 SoundInstance.createRandom(), false, 0, SoundInstance.AttenuationType.NONE, 0.0, 0.0, 0.0, true
                         )
                 );
+
                 return;
             }
         }
