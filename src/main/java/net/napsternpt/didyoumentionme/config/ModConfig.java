@@ -3,8 +3,7 @@ package net.napsternpt.didyoumentionme.config;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 
 @Config(name = "didyoumentionme")
 public class ModConfig implements ConfigData {
@@ -14,7 +13,7 @@ public class ModConfig implements ConfigData {
     public boolean onlyOnUnfocus = true;
 
     @ConfigEntry.Gui.Tooltip(count = 2)
-    public String[] namesList = {MinecraftClient.getInstance().getSession().getUsername()};
+    public String[] namesList = {Minecraft.getInstance().getUser().getName()};
 
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int volume = 100;
