@@ -26,9 +26,6 @@
 			"net.napsternpt.didyoumentionme.config.ModMenuIntegration"
 		]
 	},
-	"mixins": [
-		"didyoumentionme.mixins.json"
-	],
 	"depends": {
 		"fabricloader": ">=0.18.6",
 		"minecraft": "~26.1",
