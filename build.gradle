@@ -23,7 +23,8 @@ dependencies {
 	implementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
 	// Cloth Config GUI
-	api "me.shedaniel.cloth:cloth-config-fabric:26.1.154"
+	implementation "me.shedaniel.cloth:cloth-config-fabric:26.1.154"
+	include "me.shedaniel.cloth:cloth-config-fabric:26.1.154"
 
 	// ModMenu
 	api "com.terraformersmc:modmenu:18.0.0-alpha.8"
