@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 public class ModConfig implements ConfigData {
     public boolean enable = true;
 
-    @ConfigEntry.Gui.Tooltip(count = 1)
+    @ConfigEntry.Gui.Tooltip()
     public boolean onlyOnUnfocus = true;
 
     @ConfigEntry.Gui.Tooltip(count = 2)
